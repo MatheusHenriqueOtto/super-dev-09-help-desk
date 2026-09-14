@@ -1,22 +1,11 @@
 from fastapi import FastAPI
-from app.core.config import settings
-from app.core.database import engine, SessionLocal
-from app.core.tempo import agora
+from app.controllers.usuario_controller import router as usuario_router
 
-app = FastAPI(
-    title="Helpdesk API",
-    version="1.0.0",
-    description="API de ajuda técnica com FastAPI"
-)
 
-@app.get("/")
-def root():
-    return {"message": "Welcome to Helpdesk API", "status": "running"}
+app = FastAPI()
 
-@app.get("/health")
-def health_check():
-    return {"status": "healthy"}
+app.include_router(usuario_router)
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+# Executar
+# uvicorn app.main:app --reload
+# Chrome: localhost:8000/docs

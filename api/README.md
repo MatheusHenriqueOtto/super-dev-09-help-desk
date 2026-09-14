@@ -98,3 +98,20 @@ O projeto utiliza MySQL com SQLAlchemy e Alembic para migrações.
 - `uploads/` - Arquivos de anexo (se usado)
 - `requirements.txt` - Dependências do projeto
 - `.env.example` - Exemplo de arquivo .env
+
+
+# Entidade não existe
+- model
+- alembic
+- repository
+- schema
+- service
+- controller
+- main.py
+
+# Entidade existe adicionar método
+- repository (opcional)
+- schema
+- service
+- controller
+
