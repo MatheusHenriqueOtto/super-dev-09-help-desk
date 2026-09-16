@@ -11,7 +11,7 @@ class ErroAplicacao(Exception):
         self.detalhes = detalhes or []
 
 
-class NaoEncntradoError(ErroAplicacao):
+class NaoEncontradoError(ErroAplicacao):
     status_code = 404
     codigo = "não encontrado"
 

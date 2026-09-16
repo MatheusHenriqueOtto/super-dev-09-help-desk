@@ -5,13 +5,13 @@ class CategoriaCriar(BaseModel):
     nome: str = Field(min_length=2, max_length=60, description="Nome único da categoria")
     descricao: str | None = Field(default=None, max_length=255, description="Descrição optional")
 
-    mdodel_config = ConfigDict(
-        json_schema_extra=(
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "nome":"rede",
                 "descricao": "Problems de conexão, Wi-Fi, VPN e cabeamento"
             }
-        )
+        }
     )
 
 
@@ -19,13 +19,13 @@ class CategoriaEditar(BaseModel):
     nome: str = Field(min_length=2, max_length=60, description="Nome único da categoria")
     descricao: str | None = Field(default=None, max_length=255, description="Descrição optional")
 
-    mdodel_config = ConfigDict(
-        json_schema_extra=(
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "nome":"rede",
                 "descricao": "Problems de conexão, Wi-Fi, VPN e cabeamento"
             }
-        )
+        }
     )
 
 
@@ -34,6 +34,6 @@ class CategoriaResposta(BaseModel):
     nome: str
     descricao: str | None
 
-    mdodel_config = ConfigDict(
+    model_config = ConfigDict(
         from_attributes = True
     )

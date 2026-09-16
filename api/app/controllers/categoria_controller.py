@@ -43,7 +43,7 @@ def editar(id: int, db: DbSession, dado: CategoriaEditar):
 @router.delete(
     "/{id}",
     summary="Apagar categori filtrando por id",
-    response_model=CategoriaResposta
+    #response_model=CategoriaResposta
 )
 def apagra(id: int, db: DbSession):
     return CategoriaService(db).apagar(id)

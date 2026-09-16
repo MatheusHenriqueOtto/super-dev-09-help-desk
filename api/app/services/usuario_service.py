@@ -1,4 +1,4 @@
-from app.core.exceptions import ConflitoError, NaoEncntradoError
+from app.core.exceptions import ConflitoError, NaoEncontradoError
 from sqlalchemy.orm import Session
 
 from app.core.security import hash_senha
@@ -34,7 +34,7 @@ class UsuarioService:
         usuario = self.usuario_repository.obter_por_id(id)
 
         if usuario is None:
-            raise NaoEncntradoError("Usuario não encontrado")
+            raise NaoEncontradoError("Usuario não encontrado")
 
         usuario.nome  = dado.nome
         usuario.email = dado.email
@@ -48,7 +48,7 @@ class UsuarioService:
         usuario = self.usuario_repository.obter_por_id(id)
 
         if usuario is None:
-            raise NaoEncntradoError("Usuario não encontrado")
+            raise NaoEncontradoError("Usuario não encontrado")
 
         return usuario
 
@@ -58,7 +58,7 @@ class UsuarioService:
             usuario = self.usuario_repository.obter_por_id(id)
     
             if usuario is None:
-                raise NaoEncntradoError("Usuario não encontrado")
+                raise NaoEncontradoError("Usuario não encontrado")
 
             usuario.ativo = False
             self.db.commit()

@@ -5,8 +5,8 @@ from app.models.categoria import Categoria
 from app.repositories.base import RepositorioBase
 
 
-class CategoriaRepositorry(RepositorioBase[Categoria]):
-    def __init___(self, db:Session):
+class CategoriaRepository(RepositorioBase[Categoria]):
+    def __init__(self, db:Session):
         super().__init__(db, Categoria)
 
     def  obter_por_nome(self, nome: str) -> Categoria | None:
