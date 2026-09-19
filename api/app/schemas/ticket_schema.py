@@ -25,19 +25,23 @@ class TicketCriar(BaseModel):
 
 
 class TicketDefinirPrioridade(BaseModel):
-    pass
+    id_usuari: int = Field(alias="idUsuario")
+    prioridade: PrioridadeChamado
 
 
 class TicketAssociar(BaseModel):
-    pass
+    id_usuari: int = Field(alias="idUsuario")
+
 
 
 class TicketResolver(BaseModel):
-    pass
+    id_usuari: int = Field(alias="idUsuario")
+    descricao: str = Field(min_length=10, max_length=1000)
 
 
 class TicketCancelar(BaseModel):
-    pass
+    pid_usuari: int = Field(alias="idUsuario")
+    motivo: str = Field(min_length=10, max_length=1000)
 
 
 class TicketResposta(BaseModel):
