@@ -1,5 +1,7 @@
+# ErroAplicacao é uma classe que herda Exception
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+
 
 class ErroAplicacao(Exception):
     status_code = 500
@@ -13,7 +15,7 @@ class ErroAplicacao(Exception):
 
 class NaoEncontradoError(ErroAplicacao):
     status_code = 404
-    codigo = "não encontrado"
+    codigo = "nao_encontrado"
 
 
 class ConflitoError(ErroAplicacao):
@@ -21,21 +23,27 @@ class ConflitoError(ErroAplicacao):
     codigo = "conflito"
 
 
-def __corpo_erro(codigo: str, menssagem: str, detalhes: list) -> dict:
-    return {"codigo": codigo, "mensagem": menssagem, "detalhes": detalhes}
+class PermissaoNegadaError(ErroAplicacao):
+    status_code = 403
+    codigo = "permissao_negada"
 
+
+class RegraNegocioError(ErroAplicacao):
+    status_code = 422
+    codigo = "regra_negocio"
+
+
+def __corpo_erro(codigo: str, mensagem: str, detalhes: list) -> dict:
+    return {"codigo": codigo, "mensagem": mensagem, "detalhes": detalhes}
 
 def registrar_handler(app: FastAPI) -> None:
     @app.exception_handler(ErroAplicacao)
     async def tratar_erro_aplicacao(request: Request, exception: ErroAplicacao):
         return JSONResponse(
             status_code=exception.status_code,
-            content = __corpo_erro(
+            content=__corpo_erro(
                 exception.codigo,
                 exception.mensagem,
                 exception.detalhes
             )
         )
-
-
-

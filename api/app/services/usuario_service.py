@@ -1,6 +1,6 @@
-from app.core.exceptions import ConflitoError, NaoEncontradoError
 from sqlalchemy.orm import Session
 
+from app.core.exceptions import ConflitoError, NaoEncontradoError
 from app.core.security import hash_senha
 from app.models.usuario import Usuario
 from app.repositories.usuario_repository import UsuarioRepository
@@ -24,7 +24,6 @@ class UsuarioService:
         )
         self.usuario_repository.adicionar(usuario)
         self.db.commit()
-
         return usuario
 
     def listar(self) -> list[Usuario]:
@@ -34,9 +33,9 @@ class UsuarioService:
         usuario = self.usuario_repository.obter_por_id(id)
 
         if usuario is None:
-            raise NaoEncontradoError("Usuario não encontrado")
+            raise NaoEncontradoError("Usuário não encontrado")
 
-        usuario.nome  = dado.nome
+        usuario.nome = dado.nome
         usuario.email = dado.email
         usuario.papel = dado.papel
         usuario.senha_hash = hash_senha(dado.senha)
@@ -48,22 +47,22 @@ class UsuarioService:
         usuario = self.usuario_repository.obter_por_id(id)
 
         if usuario is None:
-            raise NaoEncontradoError("Usuario não encontrado")
+            raise NaoEncontradoError("Usuário não encontrado")
+
+        if usuario.ativo == False:
+            raise NaoEncontradoError("Usuário não encontrado")
 
         return usuario
 
 
     def apagar(self, id: int) -> Usuario:
-            "Deleta mudando o ativo=True para ativo=False"
-            usuario = self.usuario_repository.obter_por_id(id)
-    
-            if usuario is None:
-                raise NaoEncontradoError("Usuario não encontrado")
+        """Soft delete: marca `ativo=False`. O registro continua no 
+        banco para manter histórico"""
+        usuario = self.usuario_repository.obter_por_id(id)
 
-            usuario.ativo = False
-            self.db.commit()
-            return usuario
+        if usuario is None:
+            raise NaoEncontradoError("Usuário não encontrado")
 
-
-
-# core/security.py
+        usuario.ativo = False
+        self.db.commit()
+        return usuario

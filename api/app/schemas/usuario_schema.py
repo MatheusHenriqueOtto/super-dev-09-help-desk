@@ -21,11 +21,11 @@ class UsuarioCriar(BaseModel):
     )
 
 
-class UsuariosListar(BaseModel):
+class UsuarioListar(BaseModel):
     id: int = Field()
     nome: str = Field()
     email: EmailStr = Field()
-    papel: str = Field(description="ADMIN, ATENDENTE ou SOLICITANTE")
+    papel: str = Field(description="ADMIN, ATENDETE ou SOLICITANTE")
 
     model_config = ConfigDict(from_attributes=True)
 
