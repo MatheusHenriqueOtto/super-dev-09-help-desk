@@ -49,9 +49,6 @@ class UsuarioService:
         if usuario is None:
             raise NaoEncontradoError("Usuário não encontrado")
 
-        if usuario.ativo == False:
-            raise NaoEncontradoError("Usuário não encontrado")
-
         return usuario
 
 
