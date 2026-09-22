@@ -6,12 +6,11 @@ from app.controllers.categoria_controller import router as categoria_router
 
 app = FastAPI()
 
-#Traduz as esseções de dominio(app/core/exceptions.py) para resposta HTTP padronizadas
+# Traduz as exceções de domínio (app/core/exceptions.py) para respostas HTTP padronizadas
 registrar_handler(app)
 
-app.include_router(usuario_router)
 app.include_router(categoria_router)
-
+app.include_router(usuario_router)
 
 # Executar
 # uvicorn app.main:app --reload
