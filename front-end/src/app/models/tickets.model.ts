@@ -7,9 +7,20 @@ export interface TicketResposta{
     prioridade: string | null;
     setor: string;
     descricaoSolucao: string | null;
-    motivoCancelamento:string | null;
-    dataCriacao: Date;
+    motivoCancelamento: string | null;
+    dataCricacao: Date;
     dataAtualizacao: Date | null;
     solicitanteId: number;
-    atendenteId: number;
+    atendenteId: number | null;
+}
+
+export interface TicketCadastro{
+    descricao: string;
+    idUsuario: number | null;
+    setor: string;
+    titulo: string;
+}
+
+export interface TicketAssociar{
+    idUsuario: number | null;
 }

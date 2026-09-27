@@ -1,22 +1,25 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Service } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { TicketAssociar, TicketCadastro, TicketResposta } from '../models/tickets.model';
 import { Observable } from 'rxjs';
-import { TicketResposta } from '../models/tickets.model';
 
-@Service()
+@Injectable({
+  providedIn: 'root',
+})
 export class TicketService {
-    /*HttpClient é o cliente que utilizarmos no angular para fazer requests */
-    private http = inject(HttpClient);
+  private http = inject(HttpClient);
 
-// URL do back-end por enquanto está fixo, depois
-// utilizaremos environment para ser dinâmico
-    private baseUrl = `http://localhost:8000/tickets`
+  private baseUrl = `http://localhost:8000/tickets`
 
+  listar(): Observable<TicketResposta[]>{
+    return this.http.get<TicketResposta[]>(this.baseUrl);
+  }
 
-    // função que será responsável por comunicar com o back
-    // para obter a lista de tickets
-    listar(): Observable<TicketResposta[]>{
-        // faz a requisição  para /tickets no back-end
-        return this.http.get    <TicketResposta[]>(this.baseUrl)
-    }
+  cadastrar(ticket: TicketCadastro): Observable<TicketResposta> {
+    return this.http.post<TicketResposta>(this.baseUrl, ticket);
+  }
+
+  associar(id: number, ticket: TicketAssociar): Observable<TicketResposta> {
+    return this.http.post<TicketResposta>(`${this.baseUrl}/${id}/associar`, ticket)
+  }
 }

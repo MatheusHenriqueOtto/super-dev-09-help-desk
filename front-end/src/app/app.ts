@@ -3,10 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { Navbar } from './layout/navbar/navbar';
 
 @Component({
-  imports: [RouterOutlet, Navbar],
   selector: 'app-root',
-  styleUrl: './app.scss',
+  imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
+  styleUrl: './app.scss',
 })
 export class App {
   protected readonly title = signal('helpdesk');
